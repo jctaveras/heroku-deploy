@@ -1,0 +1,18 @@
+name: 'Deploy to Heroku Container Registry'
+description: 'A simple action to deploy container to Heroku Container Registry'
+inputs:
+  email: 
+    description: 'Email linked to your Heroku account'
+    required: true
+  api_key:
+    description: 'Your Heroku API Key'
+    required: true
+  app_name:
+    description: 'Your Heroku App Name'
+    required: true
+  dockerfile:
+    description: 'Dokerfile path'
+    required: true
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
