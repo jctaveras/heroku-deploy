@@ -1,5 +1,6 @@
-name: 'Deploy to Heroku Container Registry'
-description: 'A simple action to deploy container to Heroku Container Registry'
+name: 'Deploy Docker Image to Heroku App'
+author: 'Jean Carlos Taveras'
+description: 'A simple action to build, push and deploy a Docker Image to your Heroku app.'
 inputs:
   email: 
     description: 'Email linked to your Heroku account'
@@ -13,6 +14,9 @@ inputs:
   dockerfile:
     description: 'Dokerfile path'
     required: true
+branding:
+  icon: package
+  color: purple
 runs:
   using: 'node12'
   main: 'dist/index.js'
