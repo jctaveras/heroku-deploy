@@ -14,6 +14,9 @@ inputs:
   dockerfile:
     description: 'Dokerfile path'
     required: true
+  options:
+    description: 'Optional build parameters'
+    required: false
 branding:
   icon: package
   color: purple
