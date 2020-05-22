@@ -25,9 +25,10 @@ async function loginHeroku() {
 async function buildPushAndDeploy() {
   const appName = core.getInput('app_name');
   const dockerFilePath = core.getInput('dockerfile');
+  const buildOptions = core.getInput('options') ? core.getInput('options') : "";
   
   try {
-    await exec(`(cd ${dockerFilePath}; docker build . --file Dockerfile --tag registry.heroku.com/${appName}/web)`);
+    await exec(`(cd ${dockerFilePath}; docker build . --file Dockerfile ${buildOptions} --tag registry.heroku.com/${appName}/web)`);
     console.log('Image built ✅');
 
     await exec(`(cd ${dockerFilePath}; docker push registry.heroku.com/${appName}/web)`);
