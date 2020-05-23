@@ -40,7 +40,7 @@ module.exports =
 /******/ 	// the startup function
 /******/ 	function startup() {
 /******/ 		// Load entry module and return exports
-/******/ 		return __webpack_require__(609);
+/******/ 		return __webpack_require__(932);
 /******/ 	};
 /******/
 /******/ 	// run startup
@@ -56,10 +56,25 @@ module.exports = require("child_process");
 
 /***/ }),
 
-/***/ 609:
+/***/ 432:
+/***/ (function(module) {
+
+module.exports = eval("require")("@actions/core");
+
+
+/***/ }),
+
+/***/ 669:
+/***/ (function(module) {
+
+module.exports = require("util");
+
+/***/ }),
+
+/***/ 932:
 /***/ (function(__unusedmodule, __unusedexports, __webpack_require__) {
 
-const core = __webpack_require__(661);
+const core = __webpack_require__(432);
 const { promisify } = __webpack_require__(669);
 
 const exec = promisify(__webpack_require__(129).exec);
@@ -110,21 +125,6 @@ try {
   core.setFailed(error.message);
 }
 
-
-/***/ }),
-
-/***/ 661:
-/***/ (function(module) {
-
-module.exports = eval("require")("@actions/core");
-
-
-/***/ }),
-
-/***/ 669:
-/***/ (function(module) {
-
-module.exports = require("util");
 
 /***/ })
 
