@@ -25,7 +25,7 @@ async function loginHeroku() {
 async function buildPushAndDeploy() {
   const appName = core.getInput('app_name');
   const dockerFilePath = core.getInput('dockerfile');
-  const buildOptions = core.getInput('options') ? core.getInput('options') : "";
+  const buildOptions = core.getInput('options') || '';
   
   try {
     await exec(`(cd ${dockerFilePath}; docker build . --file Dockerfile ${buildOptions} --tag registry.heroku.com/${appName}/web)`);

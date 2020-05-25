@@ -3,8 +3,11 @@
   "version": "1.2.1",
   "description": "A simple action to deploy container to Heroku Container Registry",
   "main": "index.js",
-  "scripts": {
-    "build": "npx @zeit/ncc build index.js"
+  "scripts": {},
+  "husky": {
+    "hooks": {
+      "pre-commit": "npx @zeit/ncc build index.js && git add ."
+    }
   },
   "repository": {
     "type": "git",
@@ -27,5 +30,8 @@
   "dependencies": {
     "@actions/core": "^1.2.3",
     "@actions/github": "^2.1.1"
+  },
+  "devDependencies": {
+    "husky": "^4.2.5"
   }
 }

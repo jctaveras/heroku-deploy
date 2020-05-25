@@ -23,9 +23,10 @@ jobs:
           dockerfile: '' # set the path to the folder wher the Dokerfile is located
 ```
 
-| Variables  | Required           |
-| ------------- |:-------------:|
-| email      | ✅|
+| Variables  | Required      |
+|:----------:|:-------------:|
+| email        | ✅|
 | api_key      | ✅|
 | app_name | ✅|
 | dockerfile | ✅|
+| options    | ❌|
