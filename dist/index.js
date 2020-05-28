@@ -40,7 +40,7 @@ module.exports =
 /******/ 	// the startup function
 /******/ 	function startup() {
 /******/ 		// Load entry module and return exports
-/******/ 		return __webpack_require__(713);
+/******/ 		return __webpack_require__(738);
 /******/ 	};
 /******/
 /******/ 	// run startup
@@ -49,7 +49,21 @@ module.exports =
 /************************************************************************/
 /******/ ({
 
-/***/ 74:
+/***/ 87:
+/***/ (function(module) {
+
+module.exports = require("os");
+
+/***/ }),
+
+/***/ 129:
+/***/ (function(module) {
+
+module.exports = require("child_process");
+
+/***/ }),
+
+/***/ 620:
 /***/ (function(__unusedmodule, exports, __webpack_require__) {
 
 "use strict";
@@ -134,21 +148,92 @@ function escapeProperty(s) {
 
 /***/ }),
 
-/***/ 87:
+/***/ 622:
 /***/ (function(module) {
 
-module.exports = require("os");
+module.exports = require("path");
 
 /***/ }),
 
-/***/ 129:
+/***/ 669:
 /***/ (function(module) {
 
-module.exports = require("child_process");
+module.exports = require("util");
 
 /***/ }),
 
-/***/ 298:
+/***/ 738:
+/***/ (function(__unusedmodule, __unusedexports, __webpack_require__) {
+
+const core = __webpack_require__(976);
+const { promisify } = __webpack_require__(669);
+
+const exec = promisify(__webpack_require__(129).exec);
+
+async function loginHeroku() {
+  const login = core.getInput('email');
+  const password = core.getInput('api_key');
+
+  try {	
+    await exec(`echo ${password} | docker login --username=${login} registry.heroku.com --password-stdin`);	
+    console.log('Logged in succefully ✅');	
+  } catch (error) {	
+    core.setFailed(`Authentication process faild. Error: ${error.message}`);	
+  }	
+}
+
+async function buildPushAndDeploy() {
+  const appName = core.getInput('app_name');
+  const dockerFilePath = core.getInput('dockerfile_path');
+  const buildOptions = core.getInput('options') || '';
+  const herokuAction = herokuActionSetUp(appName);
+  
+  try {
+    await exec(`cd ${dockerFilePath}`);
+
+    await exec(`docker build . --file Dockerfile ${buildOptions} --tag registry.heroku.com/${appName}/web`);
+    console.log('Image built 🛠');
+
+    await exec(herokuAction('push'));
+    console.log('Container pushed to Heroku Container Registry ⏫');
+
+    await exec(herokuAction('release'));
+    console.log('App Deployed successfully 🚀');
+  } catch (error) {
+    core.setFailed(`Something went wrong building your image. Error: ${error.message}`);
+  } 
+}
+
+/**
+ * 
+ * @param {string} appName - Heroku App Name
+ * @returns {function}
+ */
+function herokuActionSetUp(appName) {
+  /**
+   * @typedef {'push' | 'release'} Actions
+   * @param {Actions} action - Action to be performed
+   * @returns {string}
+   */
+  return function herokuAction(action) {
+    const HEROKU_API_KEY = core.getInput('api_key');
+    const exportKey = `HEROKU_API_KEY=${HEROKU_API_KEY}`;
+  
+    return `${exportKey} heroku container:${action} web --app ${appName}` 
+  }
+}
+
+loginHeroku()
+  .then(() => buildPushAndDeploy())
+  .catch((error) => {
+    console.log({ message: error.message });
+    core.setFailed(error.message);
+  })
+
+
+/***/ }),
+
+/***/ 976:
 /***/ (function(__unusedmodule, exports, __webpack_require__) {
 
 "use strict";
@@ -170,7 +255,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const command_1 = __webpack_require__(74);
+const command_1 = __webpack_require__(620);
 const os = __importStar(__webpack_require__(87));
 const path = __importStar(__webpack_require__(622));
 /**
@@ -361,77 +446,6 @@ function getState(name) {
 }
 exports.getState = getState;
 //# sourceMappingURL=core.js.map
-
-/***/ }),
-
-/***/ 622:
-/***/ (function(module) {
-
-module.exports = require("path");
-
-/***/ }),
-
-/***/ 669:
-/***/ (function(module) {
-
-module.exports = require("util");
-
-/***/ }),
-
-/***/ 713:
-/***/ (function(__unusedmodule, __unusedexports, __webpack_require__) {
-
-const core = __webpack_require__(298);
-const { promisify } = __webpack_require__(669);
-
-const exec = promisify(__webpack_require__(129).exec);
-
-async function loginHeroku() {
-  const login = core.getInput('email');
-  const password = core.getInput('api_key');
-
-  try {
-    await exec(`cat >~/.netrc <<EOF
-    machine api.heroku.com
-        login ${login}
-        password ${password}
-    EOF`);
-    console.log('.netrc file create ✅');
-
-    await exec(`echo ${password} | docker login --username=${login} registry.heroku.com --password-stdin`);
-    console.log('Logged in succefully ✅');
-  } catch (error) {
-    core.setFailed(`Authentication process faild. Error: ${error.message}`);
-  }
-}
-
-async function buildPushAndDeploy() {
-  const appName = core.getInput('app_name');
-  const dockerFilePath = core.getInput('dockerfile');
-  const buildOptions = core.getInput('options') || '';
-  
-  try {
-    await exec(`(cd ${dockerFilePath}; docker build . --file Dockerfile ${buildOptions} --tag registry.heroku.com/${appName}/web)`);
-    console.log('Image built ✅');
-
-    await exec(`(cd ${dockerFilePath}; docker push registry.heroku.com/${appName}/web)`);
-    console.log('Container pushed to Heroku Container Registry ✅');
-
-    await exec(`(cd ${dockerFilePath}; heroku container:release web --app ${appName})`);
-    console.log('App Deployed successfully ✅');
-  } catch (error) {
-    core.setFailed(`Somthing went wrong building your image. Error: ${error.message}`);
-  } 
-}
-
-try {
-  loginHeroku();
-  buildPushAndDeploy();
-} catch (error) {
-  console.log({ message: error.message });
-  core.setFailed(error.message);
-}
-
 
 /***/ })
 
