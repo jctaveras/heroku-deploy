@@ -20,13 +20,14 @@ jobs:
           email: ${{ secrets.HEROKU_EMAIL }} # your heroku email
           api_key: ${{ secrets.HEROKU_API_KEY }} # your  heroku api key
           app_name: ${{ secrets.HEROKU_APP_NAME }} # you aplication name
-          dockerfile: '' # set the path to the folder wher the Dokerfile is located
+          dockerfile_path: '' # set the path to the folder wher the Dokerfile is located
+          options: '' # Docker Build Options
 ```
 
-| Variables  | Required      |
-|:----------:|:-------------:|
-| email        | ✅|
-| api_key      | ✅|
-| app_name | ✅|
-| dockerfile | ✅|
-| options    | ❌|
+| Variables          | Description                         | Required       |
+|:----------------:|:-----------------------------:|:-------------:|
+| email                | Heroku Email Account          | ✅               |
+| api_key             | Heroku API Key                    | ✅               |
+| app_name         | Heroku App Name               | ✅               |
+| dockerfile_path | Path where your Docker File | ✅               |
+| options             | Docker Build Options           | ❌               |
