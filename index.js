@@ -24,7 +24,7 @@ async function buildPushAndDeploy() {
   try {
     await exec(`cd ${dockerFilePath}`);
 
-    await exec(`docker build . --file Dockerfile ${buildOptions} --tag registry.heroku.com/${appName}/web`);
+    await exec(`docker build . ${buildOptions} --tag registry.heroku.com/${appName}/web`);
     console.log('Image built 🛠');
 
     await exec(herokuAction('push'));
