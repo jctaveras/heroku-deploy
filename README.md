@@ -31,3 +31,4 @@ jobs:
 | app_name         | Heroku App Name               | ✅               |
 | dockerfile_path | Path where your Docker File | ✅               |
 | options             | Docker Build Options           | ❌               |
+| formation           | Heroku Formation (Default: `web`)       | ❌               |
