@@ -5,6 +5,10 @@ inputs:
   email:
     description: 'Email Linked to your Heroku Account'
     required: true
+  formation:
+    description: 'Heroku Dyno Formation'
+    default: 'web'
+    required: false
   api_key:
     description: 'Your Heroku API Key'
     required: true
