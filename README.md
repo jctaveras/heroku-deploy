@@ -22,6 +22,7 @@ jobs:
           app_name: ${{ secrets.HEROKU_APP_NAME }} # you aplication name
           dockerfile_path: '' # set the path to the folder wher the Dokerfile is located
           options: '' # Docker Build Options
+          formation: '' # Docker Dyno Formation. By default is web
 ```
 
 | Variables          | Description                         | Required       |
@@ -31,3 +32,4 @@ jobs:
 | app_name         | Heroku App Name               | ✅               |
 | dockerfile_path | Path where your Docker File | ✅               |
 | options             | Docker Build Options           | ❌               |
+| formation           | Heroku Formation (Default: `web`)       | ❌               |
