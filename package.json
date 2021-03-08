@@ -1,6 +1,6 @@
 {
   "name": "deploy-heroku",
-  "version": "2.0.0",
+  "version": "2.1.2",
   "description": "A simple action to deploy container to Heroku Container Registry",
   "main": "index.js",
   "scripts": {},
