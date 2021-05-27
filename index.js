@@ -25,8 +25,8 @@ async function buildPushAndDeploy() {
     console.log(`Changing directory to ${dockerFilePath} 🛠`);
     await exec(`cd ${dockerFilePath}`);
     console.log(`Changed directory to ${dockerFilePath} 🛠🚀`);
-    console.log('Files :');
-    await exec(`ls`);
+    let { stdout, stderr } = await exec(`ls`);
+    console.log(`Files : ${stdout}`);
 
     console.log('Building Image 🛠');
     await exec(`docker build . ${buildOptions} --tag registry.heroku.com/${appName}/web`);
