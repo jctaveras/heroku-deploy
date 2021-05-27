@@ -22,15 +22,12 @@ async function buildPushAndDeploy() {
   const herokuAction = herokuActionSetUp(appName);
   
   try {
-    console.log(`Changing directory to ${dockerFilePath} 🛠`);
-    await exec(`cd ${dockerFilePath}`);
-    console.log(`Changed directory to ${dockerFilePath} 🛠🚀`);
-    let { stdout, stderr } = await exec(`ls`);
-    console.log(`Files : ${stdout}`);
-
-    console.log('Building Image 🛠');
-    await exec(`docker build . ${buildOptions} --tag registry.heroku.com/${appName}/web`);
+    const buildCommand = `docker build . ${buildOptions} --tag registry.heroku.com/${appName}/web`
+    console.log(`Changing directory to ${dockerFilePath} and building 🛠`);
+    let { stdout, stderr } = await exec(`cd ${dockerFilePath} && ls && ${buildCommand}`);
     console.log('Image built 🛠🚀');
+    console.log(`Output ${stdout}`);
+    console.log(`Errors? ${stderr}`);
 
     await exec(`docker push registry.heroku.com/${appName}/web`);
     console.log('Container pushed to Heroku Container Registry ⏫');
