@@ -1,6 +1,6 @@
 # Heroku Deploy - GitHub Action
 
-A simple action to build, push and deploy containers to you  Heroku app.
+A simple action to build, push and deploy containers to your Heroku app.
 
 ## How to use it
 
