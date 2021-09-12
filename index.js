@@ -9,7 +9,7 @@ async function loginHeroku() {
 
   try {	
     await exec(`echo ${password} | docker login --username=${login} registry.heroku.com --password-stdin`);	
-    console.log('Logged in succefully ✅');	
+    console.log('Logged in successfully ✅');	
   } catch (error) {	
     core.setFailed(`Authentication process faild. Error: ${error.message}`);	
   }	
