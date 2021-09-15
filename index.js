@@ -20,7 +20,7 @@ async function buildPushAndDeploy() {
   const dockerFilePath = core.getInput('dockerfile_path') || '.';
   const buildOptions = core.getInput('options') || '';
   const herokuAction = herokuActionSetUp(appName);
-  const formation = core.getInput('formation');
+  const formation = core.getInput('formation') || 'web';
   
   try {
     await exec(`docker build --file ${dockerFilePath}/Dockerfile ${buildOptions} --tag registry.heroku.com/${appName}/${formation} ${dockerFilePath}`);
