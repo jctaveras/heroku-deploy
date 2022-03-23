@@ -6,7 +6,7 @@
   "scripts": {},
   "husky": {
     "hooks": {
-      "pre-commit": "npx @zeit/ncc build index.js && git add ."
+      "pre-commit": "npx tsc && git add ."
     }
   },
   "repository": {
@@ -32,6 +32,7 @@
     "@actions/github": "^2.1.1"
   },
   "devDependencies": {
-    "husky": "^4.2.5"
+    "husky": "^4.2.5",
+    "typescript": "^4.6.2"
   }
 }
