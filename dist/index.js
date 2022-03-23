@@ -1,7 +1,7 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 121:
+/***/ 217:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -28,7 +28,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.issue = exports.issueCommand = void 0;
 const os = __importStar(__nccwpck_require__(37));
-const utils_1 = __nccwpck_require__(273);
+const utils_1 = __nccwpck_require__(712);
 /**
  * Commands
  *
@@ -100,7 +100,7 @@ function escapeProperty(s) {
 
 /***/ }),
 
-/***/ 697:
+/***/ 952:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -135,12 +135,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getIDToken = exports.getState = exports.saveState = exports.group = exports.endGroup = exports.startGroup = exports.info = exports.notice = exports.warning = exports.error = exports.debug = exports.isDebug = exports.setFailed = exports.setCommandEcho = exports.setOutput = exports.getBooleanInput = exports.getMultilineInput = exports.getInput = exports.addPath = exports.setSecret = exports.exportVariable = exports.ExitCode = void 0;
-const command_1 = __nccwpck_require__(121);
-const file_command_1 = __nccwpck_require__(627);
-const utils_1 = __nccwpck_require__(273);
+const command_1 = __nccwpck_require__(217);
+const file_command_1 = __nccwpck_require__(959);
+const utils_1 = __nccwpck_require__(712);
 const os = __importStar(__nccwpck_require__(37));
 const path = __importStar(__nccwpck_require__(17));
-const oidc_utils_1 = __nccwpck_require__(91);
+const oidc_utils_1 = __nccwpck_require__(389);
 /**
  * The code to exit an action
  */
@@ -419,7 +419,7 @@ exports.getIDToken = getIDToken;
 
 /***/ }),
 
-/***/ 627:
+/***/ 959:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -450,7 +450,7 @@ exports.issueCommand = void 0;
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const fs = __importStar(__nccwpck_require__(147));
 const os = __importStar(__nccwpck_require__(37));
-const utils_1 = __nccwpck_require__(273);
+const utils_1 = __nccwpck_require__(712);
 function issueCommand(command, message) {
     const filePath = process.env[`GITHUB_${command}`];
     if (!filePath) {
@@ -468,7 +468,7 @@ exports.issueCommand = issueCommand;
 
 /***/ }),
 
-/***/ 91:
+/***/ 389:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -484,9 +484,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.OidcClient = void 0;
-const http_client_1 = __nccwpck_require__(855);
-const auth_1 = __nccwpck_require__(861);
-const core_1 = __nccwpck_require__(697);
+const http_client_1 = __nccwpck_require__(137);
+const auth_1 = __nccwpck_require__(468);
+const core_1 = __nccwpck_require__(952);
 class OidcClient {
     static createHttpClient(allowRetry = true, maxRetry = 10) {
         const requestOptions = {
@@ -552,7 +552,7 @@ exports.OidcClient = OidcClient;
 
 /***/ }),
 
-/***/ 273:
+/***/ 712:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -599,7 +599,7 @@ exports.toCommandProperties = toCommandProperties;
 
 /***/ }),
 
-/***/ 861:
+/***/ 468:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -665,7 +665,7 @@ exports.PersonalAccessTokenCredentialHandler = PersonalAccessTokenCredentialHand
 
 /***/ }),
 
-/***/ 855:
+/***/ 137:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -673,7 +673,7 @@ exports.PersonalAccessTokenCredentialHandler = PersonalAccessTokenCredentialHand
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const http = __nccwpck_require__(685);
 const https = __nccwpck_require__(687);
-const pm = __nccwpck_require__(392);
+const pm = __nccwpck_require__(550);
 let tunnel;
 var HttpCodes;
 (function (HttpCodes) {
@@ -1092,7 +1092,7 @@ class HttpClient {
         if (useProxy) {
             // If using proxy, need tunnel
             if (!tunnel) {
-                tunnel = __nccwpck_require__(971);
+                tunnel = __nccwpck_require__(165);
             }
             const agentOptions = {
                 maxSockets: maxSockets,
@@ -1210,7 +1210,7 @@ exports.HttpClient = HttpClient;
 
 /***/ }),
 
-/***/ 392:
+/***/ 550:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -1275,15 +1275,15 @@ exports.checkBypass = checkBypass;
 
 /***/ }),
 
-/***/ 971:
+/***/ 165:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-module.exports = __nccwpck_require__(777);
+module.exports = __nccwpck_require__(70);
 
 
 /***/ }),
 
-/***/ 777:
+/***/ 70:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
@@ -1555,7 +1555,7 @@ exports.debug = debug; // for test
 
 /***/ }),
 
-/***/ 809:
+/***/ 900:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -1573,11 +1573,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const core_1 = __nccwpck_require__(697);
+const core_1 = __nccwpck_require__(952);
 const child_process_1 = __nccwpck_require__(81);
 const util_1 = __nccwpck_require__(837);
-const scripts_1 = __nccwpck_require__(926);
-const login_1 = __importDefault(__nccwpck_require__(957));
+const scripts_1 = __nccwpck_require__(731);
+const login_1 = __importDefault(__nccwpck_require__(436));
 const herokuAction = (0, scripts_1.herokuActionSetup)((0, core_1.getInput)('app_name'));
 (0, login_1.default)()
     .then(() => __awaiter(void 0, void 0, void 0, function* () {
@@ -1595,7 +1595,7 @@ const herokuAction = (0, scripts_1.herokuActionSetup)((0, core_1.getInput)('app_
 
 /***/ }),
 
-/***/ 957:
+/***/ 436:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -1633,14 +1633,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const core = __importStar(__nccwpck_require__(697));
+const core = __importStar(__nccwpck_require__(952));
 const child_process_1 = __nccwpck_require__(81);
 const util_1 = __nccwpck_require__(837);
-const scripts_1 = __nccwpck_require__(926);
+const scripts_1 = __nccwpck_require__(731);
 function herokuLogin() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            yield (0, util_1.promisify)(child_process_1.exec)((0, scripts_1.authenticationScript)(core.getInput('email'), core.getInput('password')));
+            yield (0, util_1.promisify)(child_process_1.exec)((0, scripts_1.authenticationScript)(core.getInput('email'), core.getInput('api_key')));
             core.info('Logged in successfully.');
         }
         catch (error) {
@@ -1653,7 +1653,7 @@ exports["default"] = herokuLogin;
 
 /***/ }),
 
-/***/ 926:
+/***/ 731:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -1683,7 +1683,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.herokuActionSetup = exports.authenticationScript = void 0;
-const core = __importStar(__nccwpck_require__(697));
+const core = __importStar(__nccwpck_require__(952));
 const authenticationScript = (username, password) => `echo ${password} | docker login --username=${username} registry.heroku.com --password-stdin`;
 exports.authenticationScript = authenticationScript;
 const herokuActionSetup = (appName) => {
@@ -1831,7 +1831,7 @@ module.exports = require("util");
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module is referenced by other modules so it can't be inlined
-/******/ 	var __webpack_exports__ = __nccwpck_require__(809);
+/******/ 	var __webpack_exports__ = __nccwpck_require__(900);
 /******/ 	module.exports = __webpack_exports__;
 /******/ 	
 /******/ })()

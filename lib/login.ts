@@ -6,7 +6,7 @@ import { authenticationScript } from "./scripts";
 
 export default async function herokuLogin() {
   try {
-    await promisify(exec)(authenticationScript(core.getInput('email'), core.getInput('password')));
+    await promisify(exec)(authenticationScript(core.getInput('email'), core.getInput('api_key')));
     core.info('Logged in successfully.');
   } catch (error) {
     core.setFailed(`Authentication process failed. Error: ${(error as Error).message}`);
