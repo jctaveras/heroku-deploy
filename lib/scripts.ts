@@ -3,7 +3,7 @@ import * as core from "@actions/core"
 type Actions = 'push' | 'release';
 
 export const authenticationScript = (username: string, password: string) => 
-  `echo ${password} | docker login --username=${username} registry.heroku.com --password-stdin)`;
+  `echo ${password} | docker login --username=${username} registry.heroku.com --password-stdin`;
 
 export const herokuActionSetup = (appName: string) => {
   return (action: Actions) => {
