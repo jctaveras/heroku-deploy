@@ -13,7 +13,10 @@ inputs:
     required: true
   dockerfile_path:
     description: 'Dokerfile path'
-    required: true 
+    required: true
+  process_type:
+    description: 'Heroku Process Type'
+    required: true
 branding:
   icon: package
   color: purple

@@ -1,4 +1,4 @@
-import * as core from "@actions/core"
+import { getInput } from "@actions/core"
 
 type Actions = 'push' | 'release';
 
@@ -7,11 +7,12 @@ export const authenticationScript = (username: string, password: string) =>
 
 export const herokuActionSetup = (appName: string) => {
   return (action: Actions) => {
-    const HEROKU_API_KEY = core.getInput('api_key');
-    const contextPath = core.getInput('dockerfile_path'); 
+    const HEROKU_API_KEY = getInput('api_key');
+    const contextPath = getInput('dockerfile_path');
+    const processType = getInput('process_type');
 
     return `HEROKU_API_KEY=${HEROKU_API_KEY} heroku container:${action} \
-      --recursive \
+      ${processType} \
       --context-path ${contextPath} \
       --app ${appName}`;
   }
