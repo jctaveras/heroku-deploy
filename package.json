@@ -6,7 +6,7 @@
   "scripts": {},
   "husky": {
     "hooks": {
-      "pre-commit": "npx tsc && git add ."
+      "pre-commit": "npx @vercel/ncc build index.ts && git add ."
     }
   },
   "repository": {
