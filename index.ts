@@ -1,4 +1,5 @@
 import { getInput, info, setFailed } from "@actions/core";
+import { promisify } from "util";
 import { exec } from "child_process";
 
 import { herokuActionSetup } from "./lib/scripts";
@@ -8,24 +9,16 @@ const herokuAction = herokuActionSetup(getInput('app_name'));
 
 herokuLogin()
   .then(async () => {
-    const child = exec(herokuAction('push'), { maxBuffer: 1024 * 1024 }, (error, stdout, stderr) => {
-      if (error) throw new Error(`stderr: ${stderr}`);
+    const { stdout } = await promisify(exec)(herokuAction('push'));
 
-      info(`stdout: ${stdout}`);
-    });
-
-    child.on('close', () => info('Your Docker image was built and pushed to Heroku Container Registry.'));
-    child.on('error', (err) => { throw new Error(err.message) });
+    info(`stdout: ${stdout}`);
+    info('Your Docker image was built and pushed to Heroku Container Registry.');
   })
   .then(async () => {
-    const child = exec(herokuAction('release'), { maxBuffer: 1024 * 1024 }, (error, stdout, stderr) => {
-      if (error) throw new Error(`stderr: ${stderr}`);
+    const { stdout } = await promisify(exec)(herokuAction('release'));
 
-      info(`stdout: ${stdout}`);
-    });
-
-    child.on('close', () => info('Your Appliction was deployed successfully.'));
-    child.on('error', (err) => { throw new Error(err.message) });
+    info(`stdout: ${stdout}`);
+    info('Your Appliction was deployed successfully.');
   })
   .catch(error => {
     setFailed(`Something went wrong building your image. [Error]: ${(error as Error).message}`);
