@@ -11,14 +11,13 @@ herokuLogin()
   .then(async () => {
     const { stdout } = await promisify(exec)(herokuAction('push'));
 
+    info('Your Docker image was built and pushed to Heroku Container Registry. 🏗');
     info(`stdout: ${stdout}`);
-    info('Your Docker image was built and pushed to Heroku Container Registry.');
   })
   .then(async () => {
-    const { stdout } = await promisify(exec)(herokuAction('release'));
+    await promisify(exec)(herokuAction('release'));
 
-    info(`stdout: ${stdout}`);
-    info('Your Appliction was deployed successfully.');
+    info('Your Appliction was deployed successfully. 🚀');
   })
   .catch(error => {
     setFailed(`Something went wrong building your image. [Error]: ${(error as Error).message}`);
