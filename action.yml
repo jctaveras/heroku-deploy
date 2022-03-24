@@ -5,10 +5,6 @@ inputs:
   email:
     description: 'Email Linked to your Heroku Account'
     required: true
-  formation:
-    description: 'Heroku Dyno Formation'
-    default: 'web'
-    required: false
   api_key:
     description: 'Your Heroku API Key'
     required: true
@@ -18,12 +14,12 @@ inputs:
   dockerfile_path:
     description: 'Dokerfile path'
     required: true
-  options:
-    description: 'Optional build parameters'
-    required: false
+  process_type:
+    description: 'Heroku Process Type'
+    required: true
 branding:
   icon: package
   color: purple
 runs:
-  using: 'node12'
+  using: 'node16'
   main: 'dist/index.js'
