@@ -12,7 +12,7 @@ inputs:
     description: 'Your Heroku App Name'
     required: true
   dockerfile_path:
-    description: 'Dokerfile path'
+    description: 'Dockerfile path'
     required: true
   process_type:
     description: 'Heroku Process Type'
