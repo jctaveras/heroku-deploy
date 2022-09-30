@@ -30,4 +30,4 @@ jobs:
 | api_key          | Heroku API Key                                                 | ✅       |
 | app_name         | Heroku App Name                                                | ✅       |
 | dockerfile_path  | Path where your Docker File                                    | ✅       |
-| procees_type     | A space separated list of process you want to build and release| ✅       |
+| process_type     | A space separated list of process you want to build and release| ✅       |
