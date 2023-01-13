@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Build, Push and Deploy to Heroku # set whatever name you want to this step
         id: heroku
-        uses: jctaveras/heroku-deploy@v1.0.0 # use the latest version of the action
+        uses: jctaveras/heroku-deploy@v2 # use the latest version of the action
         with:
           email: ${{ secrets.HEROKU_EMAIL }} # your heroku email
           api_key: ${{ secrets.HEROKU_API_KEY }} # your heroku api key

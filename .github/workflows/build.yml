@@ -9,6 +9,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - name: Create Release
         id: creat_release
         uses: actions/create-release@v1
@@ -17,3 +19,11 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
+      - name: Extract version from tag
+        uses: damienaicheh/extract-version-from-tag-action@v1.0.0
+      - name: Move the latest major version tag
+        uses: rickstaa/action-create-tag@v1
+        with:
+          tag: v${{ env.MAJOR }}
+          message: "Move the latest major version"
+          force_push_tag: True
